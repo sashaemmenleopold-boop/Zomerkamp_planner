@@ -141,7 +141,7 @@ if huidige_dag:
     with st.expander("➕ Nieuw onderdeel toevoegen", expanded=True):
         with st.form("add_blok_form"):
             c1, c2 = st.columns(2)
-            activiteit = c1.selectbox("Activiteit:", ["Ochtendgym", "Ontbijt", "Corvee", "Spel", "Koken", "Avondritueel", "Vrije invulling", "Overig"])
+            activiteit = c1.selectbox("Activiteit:", st.session_state.db['activiteiten'] + ["Overig"])
             if activiteit == "Overig":
                 activiteit = c1.text_input("Vrije tekst activiteit:")
                 
