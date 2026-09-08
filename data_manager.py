@@ -6,17 +6,13 @@ DATA_FILE = "kamp_planning.json"
 
 def init_default_data() -> Dict[str, Any]:
     return {
-        "leiding": ["Hathi", "Baloe", "Raksha"],
+        "leiding": ["Hathi", "Baloe", "Raksha", "Kotick","Ferao", "Mor", "Malchi"],
+        "activiteiten": ["Ochtendgym", "Ontbijt", "Corvee", "Spel", "Koken", "Avondritueel", "Vrije invulling"],
         "dagen": {
             "Maandag": {
                 "start_tijd": "08:00",
                 "blokken": [],
-                "notulen": {
-                    "pluimen": "",
-                    "morgen": "",
-                    "kinderen": "",
-                    "nacht": ""
-                }
+                "notulen": {"pluimen": "", "morgen": "", "kinderen": "", "nacht": ""}
             }
         }
     }
