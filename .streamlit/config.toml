@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#003366" # Maasgroep Donkerblauw
+backgroundColor = "#F8F9FA" # Frisse, hele lichte achtergrond
+secondaryBackgroundColor = "#FFFFFF" # Witte vlakken (sidebar)
+textColor = "#1E293B" # Zacht zwart/donkergrijs voor leesbaarheid
+font = "sans serif"
