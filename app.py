@@ -41,6 +41,29 @@ with st.sidebar:
             save()
             st.rerun()
     
+    # Activiteiten Beheer (Nieuw)
+    st.markdown("---")
+    st.subheader("Activiteiten Presets")
+    
+    # Zorg dat de lijst bestaat in oude opgeslagen data
+    if 'activiteiten' not in st.session_state.db:
+        st.session_state.db['activiteiten'] = ["Ochtendgym", "Ontbijt", "Corvee", "Spel", "Koken", "Avondritueel", "Vrije invulling"]
+        
+    nieuwe_act = st.text_input("Nieuwe activiteit preset:")
+    if st.button("Voeg activiteit toe") and nieuwe_act:
+        if nieuwe_act not in st.session_state.db['activiteiten']:
+            st.session_state.db['activiteiten'].append(nieuwe_act)
+            save()
+            st.rerun()
+            
+    with st.expander("Beheer huidige presets"):
+        for act in st.session_state.db['activiteiten']:
+            c_act1, c_act2 = st.columns([4, 1])
+            c_act1.write(f"- {act}")
+            if c_act2.button("❌", key=f"del_act_{act}"):
+                st.session_state.db['activiteiten'].remove(act)
+                save()
+                st.rerun()
     st.write("Huidig team:")
     for l in st.session_state.db['leiding']:
         cols = st.columns([4, 1])
