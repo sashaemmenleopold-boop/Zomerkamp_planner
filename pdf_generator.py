@@ -45,9 +45,7 @@ def generate_pdf(dag_naam: str, berekende_blokken: List[Dict[str, Any]], notulen
     elements.append(t)
     elements.append(Spacer(1, 30))
 
-    # Notulen sectie
-    elements.append(Paragraph("<b>Notulen & Bespreking</b>", styles['Heading2']))
-    
+   # Notulen sectie
     notulen_items = [
         ("Wat ging goed / Pluimen:", notulen.get('pluimen', '')),
         ("Aandachtspunten morgen:", notulen.get('morgen', '')),
@@ -55,10 +53,16 @@ def generate_pdf(dag_naam: str, berekende_blokken: List[Dict[str, Any]], notulen
         ("Avondritueel & Nachtverdeling:", notulen.get('nacht', '')),
     ]
     
-    for titel, inhoud in notulen_items:
-        elements.append(Paragraph(f"<b>{titel}</b>", styles['Heading3']))
-        elements.append(Paragraph(inhoud if inhoud else "<i>Geen notities</i>", styles['Normal']))
-        elements.append(Spacer(1, 10))
+    # Check of er überhaupt íéts is ingevuld
+    heeft_notulen = any(inhoud.strip() for _, inhoud in notulen_items)
+    
+    if heeft_notulen:
+        elements.append(Paragraph("<b>Notulen & Bespreking</b>", styles['Heading2']))
+        for titel, inhoud in notulen_items:
+            if inhoud.strip():  # Voegt dit blokje alleen toe als het niet leeg is
+                elements.append(Paragraph(f"<b>{titel}</b>", styles['Heading3']))
+                elements.append(Paragraph(inhoud, styles['Normal']))
+                elements.append(Spacer(1, 10))
 
     doc.build(elements)
     buffer.seek(0)
